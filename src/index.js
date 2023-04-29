@@ -1,6 +1,6 @@
 connect();
 
-function connect(cache) {
+export function connect(cache) {
   const ws = new WebSocket(cache.resume_gateway_url || "wss://gateway.discord.gg/?v=10&encoding=json");
   ws.cache = cache || {};
 
