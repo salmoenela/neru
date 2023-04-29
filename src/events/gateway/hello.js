@@ -1,6 +1,6 @@
 export default {
   op: 10,
-  async execute(data) {
+  execute(data) {
     setInterval(() => {
       data.ws.send(JSON.stringify({
         op: 1,
