@@ -23,4 +23,13 @@ export function connect(cache) {
     };
     ws.send(JSON.stringify(cache ? resumePayload : identifyPayload))
   }
+
+  ws.onclose = function(ctx) {
+    const resumeableOpcodes = [
+      4000, 4001, 4002, 4003, 4005, 4007, 4008, 4009
+    ];
+    if (resumeableOpcodes.includes(ctx.code)) {
+      connect(cache);
+    } else connect();
+  }
 }
