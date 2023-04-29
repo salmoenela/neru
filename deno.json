@@ -1,0 +1,10 @@
+{
+  "imports": {
+    "discord_api_types/": "https://deno.land/x/discord_api_types@0.37.40/"
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
+  }
+}
