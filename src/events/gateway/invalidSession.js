@@ -2,7 +2,7 @@ import { connect } from "../../index.js";
 
 export default {
   op: 9,
-  execute(data) {
-    connect(data.d ? data.ws.cache : null)
+  async execute(data) {
+    await connect(data.d ? data.ws.cache : null)
   }
 }
