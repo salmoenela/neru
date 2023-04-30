@@ -3,7 +3,7 @@ export default {
   async execute(data) {
     const message = data.d;
     if (message.author.bot) return;
-    console.log(message.mentions);
+    console.log(message);
     return Deno.exit();
     let body;
     if (message.content.startsWith(data.ws.config.prefix)) {
