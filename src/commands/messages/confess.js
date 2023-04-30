@@ -50,16 +50,8 @@ export default {
         })
       })).json();
 
-      await fetch(`https://discord.com/api/v${message.ws.cache.v}/channels/${message.channel_id}/messages`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          content: `Dah, cek <#${confessMessage.channel_id}> ya.`,
-          message_reference: { guild_id: message.guild_id, message_id: message.id }
-        })
+      await fetch(`https://discord.com/api/v${message.ws.cache.v}/channels/${message.channel_id}/messages/${message.id}`, {
+        method: "DELETE"
       });
     }
   }
