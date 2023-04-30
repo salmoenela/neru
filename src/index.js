@@ -32,6 +32,5 @@ export function connect(cache) {
     if (resumeableOpcodes.includes(ctx.code) || !ctx.code) {
       connect(ws.cache);
     } else connect();
-    clearInterval(ws.intervalHeartbeat)
   }
 }
