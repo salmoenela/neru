@@ -29,9 +29,9 @@ export async function connect(cache) {
     const resumePayload = {
       op: 6,
       d: {
-        seq: cache.seq,
+        seq: cache?.seq,
         token: DISCORD_TOKEN,
-        session_id: cache.session_id
+        session_id: cache?.session_id
       }
     };
     ws.send(JSON.stringify(cache ? resumePayload : identifyPayload))
