@@ -4,7 +4,7 @@ export default {
     const message = data.d;
     if (message.author.bot) return;
     if (message.content.startsWith(data.ws.config.prefix)) {
-      const response = await fetch(`https://discord.com/api/v${data.ws.cache.v}/channels/${message.channel_id}/messages`, {
+      await fetch(`https://discord.com/api/v${data.ws.cache.v}/channels/${message.channel_id}/messages`, {
         method: "POST",
         headers: {
           Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
