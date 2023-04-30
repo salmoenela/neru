@@ -51,7 +51,10 @@ export default {
       });
 
       await fetch(`https://discord.com/api/v${message.ws.cache.v}/channels/${message.channel_id}/messages/${message.id}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+          Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
+        }
       });
     }
   }
