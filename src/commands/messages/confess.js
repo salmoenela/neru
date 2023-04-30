@@ -51,6 +51,10 @@ export default {
           message_reference: { guild_id: message.guild_id, message_id: message.id }
         })
       })).json();
+
+      console.log(confessMessage);
+      Deno.exit();
+
       await fetch(`https://discord.com/api/v${message.ws.cache.v}/channels/${message.channel_id}/messages`, {
         method: "POST",
         headers: {
