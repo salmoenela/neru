@@ -1,4 +1,4 @@
-import { reonnect } from "../../index.js";
+import { reconnect } from "../../index.js";
 
 export default {
   op: 7,
