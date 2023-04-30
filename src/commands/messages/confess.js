@@ -35,7 +35,7 @@ export default {
         })
       });
 
-      const confessMessage = await (await fetch(`https://discord.com/api/v${message.ws.cache.v}/channels/${confess.targetChannel}/messages`, {
+      await fetch(`https://discord.com/api/v${message.ws.cache.v}/channels/${confess.targetChannel}/messages`, {
         method: "POST",
         headers: {
           Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
@@ -48,7 +48,7 @@ export default {
             description: message.args.join(" ")
           }]
         })
-      })).json();
+      });
 
       await fetch(`https://discord.com/api/v${message.ws.cache.v}/channels/${message.channel_id}/messages/${message.id}`, {
         method: "DELETE"
