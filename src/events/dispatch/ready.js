@@ -11,7 +11,7 @@ export default {
       data.ws.commands[dir.name] = {};
       for await (const file of Deno.readDir(`./src/commands/messages`)) {
         const command = (await import(`../../commands/${file.name}`)).default;
-        data.ws.commands[dir.name][file.name[0]] = command;
+        data.ws.commands[dir.name][file.name.split(".")[0]] = command;
       }
     }
   }
