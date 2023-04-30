@@ -1,0 +1,20 @@
+run-name: ${{ inputs.task }}
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@9db7f66e8e16b5699a514448ce994936c63f0d54
+        with:
+          deno-version: v1.x
+      - run: deno task ${{ inputs.task }}
