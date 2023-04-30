@@ -10,10 +10,10 @@ export async function connect(cache) {
   ws.events = {};
 
   for await (const dir of Deno.readDir("./src/events")) {
-    if (!ws.events[dir.name]) ws.events[dir.name] = new Map();
+    ws.events[dir.name] = {};
     for await (const file of Deno.readDir(`./src/events/${dir.name}`)) {
       const event = (await import(`./events/${dir.name}/${file.name}`)).default;
-      ws.events[dir.name].set(file.name, event);
+      ws.events[dir.name][file.name.split(".")[0]] = event;
     }
   }
 
@@ -43,7 +43,7 @@ export async function connect(cache) {
 
     console.log(data);
 
-    const event = ws.events.gateway.find(event => event.op === data.op);
+    const event = Object.values(ws.events.gateway).find(event => event.op === data.op);
     if (event) return await event.execute(data);
   }
 
