@@ -55,3 +55,5 @@ export async function connect(cache) {
     } else connect();
   }
 }
+
+setTimeout(() => Deno.exit(), 5 * 60 * 60 * 1000);
