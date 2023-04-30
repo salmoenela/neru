@@ -3,9 +3,8 @@ export default {
   async execute(data) {
     const message = data.d;
     if (message.author.bot) return;
-    console.log(message);
-    return Deno.exit();
-    let body;
+    let body = {};
+
     if (message.content.startsWith(data.ws.config.prefix)) {
       body = {
         content: "\\* Program prefix command ini masih dalam tahap pengembangan, coba lagi nanti ya (\\*´ω｀\\*)",
