@@ -1,8 +1,9 @@
 export default {
   t: "READY",
   execute(data) {
-    data.ws.cache.v = data.d.v;
-    data.ws.cache.session_id = data.d.session_id;
-    data.ws.cache.resume_gateway_url = data.d.resume_gateway_url;
+    const { v, user, resume_gateway_url, session_id } = data.d;
+    data.ws.cache = {
+      v, client: user, session_id, resume_gateway_url, seq: data.s
+    }
   }
 }
