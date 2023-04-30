@@ -6,6 +6,6 @@
     }
   },
   "tasks": {
-    "start": "deno run --allow-net --allow-env src/index.js"
+    "start": "deno run --allow-env --allow-net --allow-read=. src/index.js"
   }
 }
