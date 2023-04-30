@@ -41,14 +41,12 @@ export async function connect(cache) {
     const data = JSON.parse(ctx.data);
     data.ws = ws;
 
-    console.log(data);
-
     const event = Object.values(ws.events.gateway).find(event => event.op === data.op);
     if (event) return await event.execute(data);
   }
 
   ws.onclose = function(ctx) {
-    console.log(ctx);
+    console.log("Closed");
     const resumeableOpcodes = [
       4000, 4001, 4002, 4003, 4005, 4007, 4008, 4009
     ];
