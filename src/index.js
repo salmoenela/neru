@@ -1,7 +1,7 @@
 import config from "./config.json" assert { type: "json" };
 const { DISCORD_TOKEN } = Deno.env.toObject();
 
-await connect();
+connect();
 
 export async function connect(cache) {
   const ws = new WebSocket(cache?.resume_gateway_url || "wss://gateway.discord.gg/?v=10&encoding=json");
@@ -41,11 +41,14 @@ export async function connect(cache) {
     const data = JSON.parse(ctx.data);
     data.ws = ws;
 
+    console.log(data);
+
     const event = ws.events.gateway.find(event => event.op === data.op);
     if (event) return await event.execute(data);
   }
 
   ws.onclose = function(ctx) {
+    console.log(ctx);
     const resumeableOpcodes = [
       4000, 4001, 4002, 4003, 4005, 4007, 4008, 4009
     ];
