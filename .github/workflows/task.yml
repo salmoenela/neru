@@ -9,6 +9,9 @@ on:
 permissions:
   contents: read
 
+env:
+  DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+
 jobs:
   run:
     runs-on: ubuntu-latest
