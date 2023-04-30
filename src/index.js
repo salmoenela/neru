@@ -3,9 +3,8 @@ const { DISCORD_TOKEN } = Deno.env.toObject();
 
 connect();
 
-export async function connect(cache) {
-  const ws = new WebSocket(cache?.resume_gateway_url || "wss://gateway.discord.gg/?v=10&encoding=json");
-  ws.cache = cache || { seq: null };
+export async function connect() {
+  const ws = new WebSocket("wss://gateway.discord.gg/?v=10&encoding=json");
   ws.config = config;
   ws.events = {};
 
@@ -26,15 +25,8 @@ export async function connect(cache) {
         intents: [1 << 0, 1 << 9, 1 << 15].reduce((x, z) => x | z)
       }
     };
-    const resumePayload = {
-      op: 6,
-      d: {
-        seq: cache?.seq,
-        token: DISCORD_TOKEN,
-        session_id: cache?.session_id
-      }
-    };
-    ws.send(JSON.stringify(cache ? resumePayload : identifyPayload))
+    
+    ws.send(JSON.stringify(identifyPayload))
   }
 
   ws.onmessage = async function(ctx) {
@@ -51,9 +43,23 @@ export async function connect(cache) {
       4000, 4001, 4002, 4003, 4005, 4007, 4008, 4009
     ];
     if (resumeableOpcodes.includes(ctx.code) || !ctx.code) {
-      connect(ws.cache);
+      reconnect(ws.cache);
     } else connect();
   }
 }
 
+export function reconnect(cache) {
+  const ws = new WebSocket(cache.resume_gateway_url);
+  ws.onopen = function() {
+    const resumePayload = {
+      op: 6,
+      d: {
+        seq: cache.seq,
+        token: DISCORD_TOKEN,
+        session_id: cache.session_id
+      }
+    };
+    ws.send(JSON.stringify(resumePayload))
+  }
+}
 setTimeout(() => Deno.exit(), 5 * 60 * 60 * 1000);
