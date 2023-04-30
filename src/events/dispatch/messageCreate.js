@@ -7,7 +7,7 @@ export default {
     let body;
     if (message.content.startsWith(data.ws.config.prefix)) {
       body = {
-        content: "* Program prefix command ini masih dalam tahap pengembangan, coba lagi nanti ya (\\*´ω｀\\*)",
+        content: "\\* Program prefix command ini masih dalam tahap pengembangan, coba lagi nanti ya (\\*´ω｀\\*)",
         message_reference: { message_id: message.id, guild_id: message.guild_id }
       }
     } else if (message.mentions.find(mention => mention.id === data.ws.cache.client.id)) {
