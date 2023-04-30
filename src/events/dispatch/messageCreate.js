@@ -12,7 +12,7 @@ export default {
       }
     } else if (message.mentions.find(mention => mention.id === data.ws.cache.client.id)) {
       body = {
-        content: "Kalau mau menggunakan comannd, pakai `${data.ws.config.prefix}` sebagai prefix ya.",
+        content: `Kalau mau menggunakan comannd, pakai \`${data.ws.config.prefix}\` sebagai prefix ya.`,
         message_reference: { message_id: message.id, guild_id: message.guild_id }
       }
     }
