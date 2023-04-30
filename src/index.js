@@ -1,15 +1,18 @@
+import config from "./config.json" assert { type: "json" };
 const { DISCORD_TOKEN } = Deno.env.toObject();
+
 await connect();
 
 export async function connect(cache) {
   const ws = new WebSocket(cache?.resume_gateway_url || "wss://gateway.discord.gg/?v=10&encoding=json");
   ws.cache = cache || { seq: null };
+  ws.config = config;
   ws.events = {};
 
   for await (const dir of Deno.readDir("./src/events")) {
     if (!ws.events[dir.name]) ws.events[dir.name] = new Map();
     for await (const file of Deno.readDir(`./src/events/${dir.name}`)) {
-      const event = (await import(`./src/events/${dir.name}/${file.name}`)).default;
+      const event = (await import(`./events/${dir.name}/${file.name}`)).default;
       ws.events[dir.name].set(file.name, event);
     }
   }
