@@ -4,5 +4,8 @@
     "rules": {
       "tags": ["recommended"]
     }
+  },
+  "tasks": {
+    "start": "deno run --allow-net --allow-env src/index.js"
   }
 }
