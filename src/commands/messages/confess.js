@@ -31,11 +31,11 @@ export default {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          embeds: [
+          embeds: [{
             color: 0xFF91FC,
             author: { name: `${message.author.username}#${message.author.discriminator}`, icon_url },
             description: message.args.join(" ")
-          ],
+          }],
           message_reference: { guild_id: message.guild_id, message_id: message.id }
         })
       })).json();
