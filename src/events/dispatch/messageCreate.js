@@ -2,8 +2,7 @@ export default {
   t: "MESSAGE_CREATE",
   async execute(data) {
     const message = data.d;
-    console.log(message);
-    console.log(data.ws);
+    if (message.author.bot) return;
     if (message.content.startsWith(data.ws.config.prefix)) {
       const response = await fetch(`https://discord.com/api/v${data.ws.cache.v}/channels/${message.channel_id}/messages`, {
         method: "POST",
@@ -16,8 +15,6 @@ export default {
           message_reference: { message_id: message.id, guild_id: message.guild_id }
         })
       });
-      const result = await response.json();
-      console.log(result);
     }
   }
 }
