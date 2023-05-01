@@ -15,7 +15,7 @@ export default {
     body.set("payload_json", JSON.stringify({
       message_reference: { message_id: message.id, guild_id: message.guild_id }
     }))
-    body.set("files[0]", avatar);
+    body.set("files[0]", avatar, `avatar.${avatar.type.split("/")[1]}`);
     const response = await fetch(`https://discord.com/api/v${message.ws.cache.v}/channels/${message.channel_id}/messages`, {
       method: "POST",
       headers: {
