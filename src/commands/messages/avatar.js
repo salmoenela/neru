@@ -9,7 +9,7 @@ export default {
     console.log(avatarURL)
     const avatarData = await fetch(avatarURL);
     console.log(avatarData);
-    const avatar = await avatarData.body();
+    const avatar = await avatarData.blob();
     console.log(avatar);
     const body = new FormData()
       .set("payload_json", JSON.stringify({
