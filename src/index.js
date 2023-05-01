@@ -33,6 +33,8 @@ export async function connect() {
     const data = JSON.parse(ctx.data);
     data.ws = ws;
 
+    if (data.op) console.log(data);
+
     const event = Object.values(ws.events.gateway).find(event => event.op === data.op);
     if (event) return await event.execute(data);
   }
@@ -60,6 +62,14 @@ export function reconnect(cache) {
       }
     };
     ws.send(JSON.stringify(resumePayload))
+  }
+
+  ws.onmessage = function(ctx) {
+    console.log("Resume Message", JSON.parse(ctx.data));
+  }
+
+  ws.onclose = function(ctx) {
+    console.log("Resume Close", ctx);
   }
 }
 
