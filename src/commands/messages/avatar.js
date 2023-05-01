@@ -16,7 +16,7 @@ export default {
     }))
     body.set("files[0]", avatar, `avatar.${avatar.type.split("/")[1]}`);
 
-    const response = await fetch(`https://discord.com/api/v${message.ws.cache.v}/channels/${message.channel_id}/messages`, {
+    await fetch(`https://discord.com/api/v${message.ws.cache.v}/channels/${message.channel_id}/messages`, {
       method: "POST",
       headers: {
         Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
