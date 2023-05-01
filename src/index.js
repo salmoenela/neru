@@ -38,7 +38,7 @@ export async function connect() {
   }
 
   ws.onclose = function(ctx) {
-    console.log("Closed");
+    console.log("Closed", ctx);
     const resumeableOpcodes = [
       4000, 4001, 4002, 4003, 4005, 4007, 4008, 4009
     ];
@@ -62,4 +62,5 @@ export function reconnect(cache) {
     ws.send(JSON.stringify(resumePayload))
   }
 }
+
 setTimeout(() => Deno.exit(), 5 * 60 * 60 * 1000);
