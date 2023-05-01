@@ -5,7 +5,7 @@ export default {
     aliases: ["av"]
   },
   async execute(message) {
-    const avatar = await (await fetch("https://cdn.discordapp.com/" + (message.member.avatar ? `guilds/${message.guild_id}/users/${message.author.id}/avatars/${message.member.avatar}.${message.member.avatar.startsWith("a_") ? "gif" : "png"}` : (message.author.avatar ? `avatars/${message.author.id}/${message.author.avatar}.${message.author.avatar.startsWith("a_") ? "gif" : "png"}` : `embed/avatars/${message.author.discriminator % 5}.png`))) + "?size=2048").body();
+    const avatar = await (await fetch("https://cdn.discordapp.com/" + (message.member.avatar ? `guilds/${message.guild_id}/users/${message.author.id}/avatars/${message.member.avatar}.${message.member.avatar.startsWith("a_") ? "gif" : "png"}` : (message.author.avatar ? `avatars/${message.author.id}/${message.author.avatar}.${message.author.avatar.startsWith("a_") ? "gif" : "png"}` : `embed/avatars/${message.author.discriminator % 5}.png`)))) + "?size=2048").body();
     const body = new FormData()
       .set("payload_json", JSON.stringify({
         message_reference: { message_id: message.id, guild_id: message.guild_id }
