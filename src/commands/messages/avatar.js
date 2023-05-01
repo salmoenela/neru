@@ -6,7 +6,11 @@ export default {
   },
   async execute(message) {
     const avatarURL = "https://cdn.discordapp.com/" + (message.member.avatar ? `guilds/${message.guild_id}/users/${message.author.id}/avatars/${message.member.avatar}.${message.member.avatar.startsWith("a_") ? "gif" : "png"}` : (message.author.avatar ? `avatars/${message.author.id}/${message.author.avatar}.${message.author.avatar.startsWith("a_") ? "gif" : "png"}` : `embed/avatars/${message.author.discriminator % 5}.png`)) + "?size=2048";
-    const avatar = await (await fetch(avatarURL)).body();
+    console.log(avatarURL)
+    const avatarData = await fetch(avatarURL);
+    console.log((await avatarData.json()));
+    const avatar = await avatarData.body();
+    console.log(avatar);
     const body = new FormData()
       .set("payload_json", JSON.stringify({
         message_reference: { message_id: message.id, guild_id: message.guild_id }
